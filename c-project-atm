@@ -1,0 +1,119 @@
+#include <stdio.h>
+
+// Function to display the main menu
+void displayMenu() {
+    printf("\n****** ATM MENU ******\n");
+    printf("1. Check Balance\n");
+    printf("2. Deposit\n");
+    printf("3. Withdraw\n");
+    printf("4. Change PIN\n");
+    printf("5. Exit\n");
+    printf("************************\n");
+}
+
+int main() {
+    int pin;        // PIN entered by the user
+    float balance;  // Initial balance
+
+    printf("Welcome to the ATM!\n");
+
+    // Input the initial PIN and balance
+    printf("Enter your initial PIN: ");
+    scanf("%d", &pin);
+
+    printf("Enter your initial balance: $");
+    scanf("%f", &balance);
+
+    int option;
+    int enteredPin;
+
+    do {
+        displayMenu();
+        printf("Enter your option: ");
+        scanf("%d", &option);
+
+        switch (option) {
+            case 1:
+                printf("enter your pin");
+                scanf("%d",&enteredPin);
+                if(pin==enteredPin)
+                    printf("\nYour current balance is: $%.2f\n", balance);
+                    
+                else
+                printf("wrong pin");
+                break;
+
+            case 2:
+                float depositAmount;
+                printf("enter your pin");
+                scanf("%d",&enteredPin);
+                if(pin==enteredPin)
+                {
+                    printf("\nEnter the amount to deposit: $");
+                    scanf("%f", &depositAmount);
+
+                    if (depositAmount > 0) {
+                    balance += depositAmount;
+                    printf("Deposit of $%.2f successful.\n", depositAmount);
+                    } else {
+                    printf("Invalid amount. Please enter a positive value.\n");
+                    }
+                }
+                
+                else
+                printf("wrong pin");
+                break;
+
+            case 3:
+                float withdrawAmount;
+                 printf("enter your pin");
+                scanf("%d",&enteredPin);
+                if(pin==enteredPin)
+                {
+                    printf("\nEnter the amount to withdraw: $");
+                    scanf("%f", &withdrawAmount);
+
+                    if (withdrawAmount > 0) {
+                        if (withdrawAmount <= balance) {
+                            balance -= withdrawAmount;
+                            printf("Withdrawal of $%.2f successful.\n", withdrawAmount);
+                         } else {
+                        printf("Insufficient balance.\n");
+                        }
+                    } else {
+                        printf("Invalid amount. Please enter a positive value.\n");
+                    }
+                }
+                
+                else
+                printf("wrong pin");
+                break;
+
+            case 4:
+                printf("\nEnter your current PIN: ");
+                scanf("%d", &enteredPin);
+
+                if (enteredPin == pin) {
+                    int newPin;
+                    printf("Enter your new PIN: ");
+                    scanf("%d", &newPin);
+                    pin = newPin;
+                    printf("PIN changed successfully.\n");
+                } else {
+                    printf("Incorrect PIN.\n");
+                }
+                break;
+
+            case 5:
+                printf("\nThank you for using the ATM. Goodbye!\n");
+                break;
+
+            default:
+                printf("\nInvalid option. Please try again.\n");
+                break;
+        }
+
+    } while (option != 5);
+
+    return 0;
+}
